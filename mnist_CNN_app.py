@@ -7,10 +7,10 @@ import torch
 import cv2
 import torchvision
 
-st.write('# MNIST_Plus Digit Recognition')
+st.write('# MNIST Digit Recognition')
 st.write('## Using a CNN `PyTorch` model')
 
-Network = torch.load('model_torch_MNIST_plus_CNN_98_5_streamlit.chk')
+Network = torch.load('model_torch_MNIST_CNN_99_1_streamlit.chk')
 
 
 st.write('### Draw a digit in 0-9 in the box below')
@@ -94,9 +94,9 @@ if canvas_result.image_data is not None:
     # Padding
     tensor_image = torch.nn.functional.pad(tensor_image, (3,3,3,3), "constant", 0)
     # Normalization shoudl be done after padding i guess
-    convert_tensor = torchvision.transforms.Normalize((0.1281), (0.3043)) # Mean and std of MNIST_plus
+    convert_tensor = torchvision.transforms.Normalize((0.1307), (0.3081)) # Mean and std of MNIST
     tensor_image = convert_tensor(tensor_image)
-    # st.write(tensor_image.shape)
+    # st.write(tensor_image.shape) 
     # Shape of tensor image is (1,28,28)
     
 
@@ -118,7 +118,7 @@ if canvas_result.image_data is not None:
     # st.image('processed_tensor.png')
     # st.write(tensor_image.detach().cpu().numpy().reshape(28,28))
 
-    
+
     device='cpu'
     ### Compute the predictions
     with torch.no_grad():
@@ -151,7 +151,7 @@ if canvas_result.image_data is not None:
     st.write('2. Convert it to size 22x22.')
     st.write('3. Pad the image with 3 pixels on all the sides to get a 28x28 image.')
     st.write('4. Normalize the image to have pixel values between 0 and 1.')
-    st.write('5. Standardize the image using the mean and standard deviation of the MNIST_plus training dataset.')
+    st.write('5. Standardize the image using the mean and standard deviation of the MNIST training dataset.')
 
     st.write('### Processed image')
     st.image('processed_tensor.png')
